@@ -3,6 +3,10 @@ export class CommonActions {
     return cy.get(selector).click();
   }
 
+  forceClick(selector) {
+    return cy.get(selector).click({ force: true });
+  }
+
   type(selector, value) {
     return cy.get(selector).clear().type(value);
   }

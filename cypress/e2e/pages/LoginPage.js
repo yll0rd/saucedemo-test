@@ -6,7 +6,7 @@ export class LoginPage {
   passwordField = '[data-test="password"]';
   loginButton = '[data-test="login-button"]';
   errorMessage = '[data-test="error"]';
-  loginForm = 'form';
+  loginForm = 'form[aria-label="Login"]';
 
   constructor() {
     this.actions = new CommonActions();
