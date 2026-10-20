@@ -1,0 +1,13 @@
+{
+  "validPassword": "secret_sauce",
+  "validUsers": [
+    "standard_user",
+    "problem_user",
+    "visual_user",
+    "error_user",
+    "performance_glitch_user"
+  ],
+  "lockedOutUser": "locked_out_user",
+  "invalidUsername": "nonexistent_user",
+  "invalidPassword": "wrong_password"
+}
