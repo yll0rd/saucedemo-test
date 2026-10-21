@@ -1,7 +1,9 @@
 import loginData from '../../../fixtures/saucedemo/login.json';
 import { LoginPage } from '../../pages/LoginPage';
+import { InventoryPage } from '../../pages/InventoryPage';
 
 const loginPage = new LoginPage();
+const inventoryPage = new InventoryPage();
 
 describe('SauceDemo login', () => {
   beforeEach(() => {
@@ -20,10 +22,43 @@ describe('SauceDemo login', () => {
     it(`logs in successfully as ${username}`, () => {
       loginPage.login(username, loginData.validPassword);
 
-      if (username === 'performance_glitch_user') {
-        cy.location('pathname', { timeout: 10000 }).should('include', '/inventory.html');
-      } else {
+      if (username === 'standard_user') {
         loginPage.assertOnInventoryPage();
+        return;
+      }
+
+      if (username === 'performance_glitch_user') {
+        const loginStartedAt = Date.now();
+
+        loginPage.assertOnInventoryPage()
+          .then(() => {
+            expect(Date.now() - loginStartedAt).to.be.at.least(5000);
+          });
+        return;
+      }
+
+      if (username === 'problem_user') {
+        loginPage.assertOnInventoryPage();
+        inventoryPage.assertAllProductImagesAreSame();
+
+        cy.get(inventoryPage.productCard).should('have.length.greaterThan', 3);
+        inventoryPage.assertNotAllAddToCartButtonsWork();
+        inventoryPage.resetAppState();
+        
+        return;
+      }
+
+      if (username === 'visual_user') {
+        loginPage.assertOnInventoryPage();
+        cy.get(inventoryPage.shoppingCartContainer).should('have.class', 'visual_failure');
+        return;
+      }
+
+      if (username === 'error_user') {
+        loginPage.assertOnInventoryPage();
+        inventoryPage.assertNotAllAddToCartButtonsWork();
+        inventoryPage.resetAppState();
+        return;
       }
     });
   });
