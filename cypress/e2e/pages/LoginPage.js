@@ -17,14 +17,14 @@ export class LoginPage {
   }
 
   assertLoaded() {
-    cy.get('#root').should('exist');
+    this.actions.shouldExist('#root');
   }
 
   assertLoginFormIsVisible() {
-    cy.get(this.loginForm).within(() => {
-      cy.get(this.usernameField).should('exist');
-      cy.get(this.passwordField).should('exist');
-      cy.get(this.loginButton).should('exist');
+    this.actions.shouldExist(this.loginForm).within(() => {
+      this.actions.shouldExist(this.usernameField);
+      this.actions.shouldExist(this.passwordField);
+      this.actions.shouldExist(this.loginButton);
     });
   }
 
@@ -37,7 +37,7 @@ export class LoginPage {
   }
 
   submit() {
-    return this.actions.click(this.loginButton);
+    return this.actions.clickOnWebElement(this.loginButton);
   }
 
   login(username, password) {
@@ -51,10 +51,10 @@ export class LoginPage {
   }
 
   assertOnInventoryPage() {
-    return cy.location('pathname').should('include', '/inventory.html');
+    return this.actions.assertOnPath('/inventory.html');
   }
 
   assertOnLoginPage() {
-    return cy.location('pathname').should('eq', '/');
+    return this.actions.assertOnPath('/');
   }
 }

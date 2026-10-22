@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import { CommonActions } from '../e2e/actions/CommonActions';
+
+const ca = new CommonActions();
+
+// logout user from app
+Cypress.Commands.add('logout', () => {
+    ca.resetAppState();
+    ca.clickOnLogoutLink();
+});

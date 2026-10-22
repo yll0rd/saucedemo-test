@@ -1,0 +1,8 @@
+{
+  "sortOptions": {
+    "nameAscending": "Name (A to Z)",
+    "nameDescending": "Name (Z to A)",
+    "priceAscending": "Price (low to high)",
+    "priceDescending": "Price (high to low)"
+  }
+}

@@ -1,10 +1,11 @@
 import loginData from '../../../fixtures/saucedemo/login.json';
 import { LoginPage } from '../../pages/LoginPage';
 import { InventoryPage } from '../../pages/InventoryPage';
+import { CommonActions } from '../../actions/CommonActions';
 
 const loginPage = new LoginPage();
 const inventoryPage = new InventoryPage();
-
+const ca = new CommonActions();
 describe('SauceDemo login', () => {
   beforeEach(() => {
     loginPage.visit();
@@ -43,7 +44,8 @@ describe('SauceDemo login', () => {
 
         cy.get(inventoryPage.productCard).should('have.length.greaterThan', 3);
         inventoryPage.assertNotAllAddToCartButtonsWork();
-        inventoryPage.resetAppState();
+        ca.resetAppState();
+        inventoryPage.verifyShoppingCartBadgeDoesNotExist();
         
         return;
       }
@@ -57,7 +59,8 @@ describe('SauceDemo login', () => {
       if (username === 'error_user') {
         loginPage.assertOnInventoryPage();
         inventoryPage.assertNotAllAddToCartButtonsWork();
-        inventoryPage.resetAppState();
+        ca.resetAppState();
+        inventoryPage.verifyShoppingCartBadgeDoesNotExist();
         return;
       }
     });
