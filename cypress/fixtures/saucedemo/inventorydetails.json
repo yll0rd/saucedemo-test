@@ -1,0 +1,9 @@
+{
+  "actionButtons": {
+    "addToCart": "Add to cart",
+    "removeFromCart": "Remove"
+  },
+  "backToProducts": "Back to products",
+  "notFoundTitle": "ITEM NOT FOUND",
+  "invalidProductId": "not-a-product-id"
+}
