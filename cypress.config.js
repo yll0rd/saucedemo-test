@@ -1,3 +1,4 @@
+const fs = require("fs");
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
@@ -5,7 +6,29 @@ module.exports = defineConfig({
     baseUrl: "https://www.saucedemo.com",
     specPattern: "cypress/e2e/tests/**/*.cy.js",
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      on("task", {
+        clearPdfDownloads() {
+          if (!fs.existsSync(config.downloadsFolder)) {
+            return null;
+          }
+
+          fs.readdirSync(config.downloadsFolder)
+            .filter((fileName) => fileName.toLowerCase().endsWith(".pdf"))
+            .forEach((fileName) => {
+              fs.unlinkSync(`${config.downloadsFolder}/${fileName}`);
+            });
+
+          return null;
+        },
+        listPdfDownloads() {
+          if (!fs.existsSync(config.downloadsFolder)) {
+            return [];
+          }
+
+          return fs.readdirSync(config.downloadsFolder)
+            .filter((fileName) => fileName.toLowerCase().endsWith(".pdf"));
+        },
+      });
     },
   },
 });
