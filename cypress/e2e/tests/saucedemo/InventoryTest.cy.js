@@ -59,6 +59,17 @@ describe('SauceDemo inventory', () => {
         });
     })
 
+    it('Verify Product Image Redirects to Item Detail Page', () => {
+        inventoryPage.assertProductCardExist(`${inventoryPage.productCard}:first`);
+        cy.get(`${inventoryPage.productCard}:first`).within(() => {
+            ca.getTextFromElement(inventoryPage.productCardTitle).then((productTitle) => {
+                ca.clickOnWebElement(inventoryPage.productCardImage);
+                inventoryDetailPage.assertOnPage();
+                cy.get(inventoryDetailPage.inventoryDetailNameSelector).should('have.text', productTitle);
+            });
+        });
+    })
+
     it('Verify Cart Button Toggle Between Add to Cart and Remove', () => {
         inventoryPage.assertProductCardExist(`${inventoryPage.productCard}:first`);
 
