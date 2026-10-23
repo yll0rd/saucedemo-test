@@ -1,0 +1,14 @@
+{
+  "paymentInfoLabel": "Payment Information:",
+  "paymentInfoValue": "SauceCard #31337",
+  "shippingInfoLabel": "Shipping Information:",
+  "shippingInfoValue": "Free Pony Express Delivery!",
+  "subtotalLabel": "Item total:",
+  "taxLabel": "Tax:",
+  "totalLabel": "Total:",
+  "taxRate": 0.08,
+  "buttons": {
+    "cancel": "Cancel",
+    "finish": "Finish"
+  }
+}
