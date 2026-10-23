@@ -5,7 +5,7 @@ export class CheckoutCompletePage {
     completeHeader = '[data-test="complete-header"]';
     completeText = '[data-test="complete-text"]';
     backHomeButton = '[data-test="back-to-products"]';
-    generatePdfButton = '[data-test="generate-pdf"]';
+    generatePdfButton = '[data-test="generate-pdf-order"]';
     shoppingCartBadge = '[data-test="shopping-cart-badge"]';
 
     constructor() {
