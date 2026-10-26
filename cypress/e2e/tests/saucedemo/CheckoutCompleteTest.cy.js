@@ -66,34 +66,6 @@ describe('SauceDemo checkout complete', () => {
         ca.shouldBeVisible(checkoutCompletePage.generatePdfButton)
             .and('contain', checkoutCompleteData.buttonLabels.generatePdf);
 
-        cy.task('clearPdfDownloads');
-        cy.task('listPdfDownloads').then((downloadsBeforeClick) => {
-            checkoutCompletePage.clickGeneratePdf();
-
-            const assertNewPdfDownloaded = (attempt = 0) => {
-                cy.task('listPdfDownloads').then((downloadsAfterClick) => {
-                    const newDownloads = downloadsAfterClick.filter(
-                        (fileName) => !downloadsBeforeClick.includes(fileName)
-                    );
-
-                    if (newDownloads.length === 0) {
-                        if (attempt >= 40) {
-                            throw new Error('No PDF file was downloaded after clicking Generate PDF order');
-                        }
-
-                        cy.wait(500);
-                        assertNewPdfDownloaded(attempt + 1);
-                        return;
-                    }
-
-                    cy.readFile(`cypress/downloads/${newDownloads[0]}`, null).then((file) => {
-                        expect(file.length).to.be.greaterThan(0);
-                        expect(file.toString('ascii', 0, 4)).to.equal('%PDF');
-                    });
-                });
-            };
-
-            assertNewPdfDownloaded();
-        });
+        checkoutCompletePage.assertPdfDownloaded();
     });
 });
