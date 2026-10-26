@@ -22,6 +22,7 @@ describe('SauceDemo checkout step two', () => {
         cy.visit('/');
         loginPage.login(loginData.validUsername, loginData.validPassword);
         inventoryPage.addToCart(`${inventoryPage.productCard}:first`);
+        inventoryPage.addToCart(`${inventoryPage.productCard}:nth-child(2)`);
         ca.clickOnWebElement(inventoryPage.shoppingCartLinkIcon);
         cartPage.assertOnPage();
         cy.get(cartPage.cartItem).first().within(() => {
@@ -125,7 +126,7 @@ describe('SauceDemo checkout step two', () => {
     it('Verify Cancel button redirects to inventory page from cart', () => {
         checkoutStepTwoPage.cancel();
         inventoryPage.assertOnPage();
-        inventoryPage.assertShoppingCartItemCount(1);
+        inventoryPage.assertShoppingCartItemCount(2);
     });
 
     it('Verify Finish button redirects to checkout complete from cart', () => {
