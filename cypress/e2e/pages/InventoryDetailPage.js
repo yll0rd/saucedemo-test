@@ -36,6 +36,9 @@ export class InventoryDetailPage {
         this.actions.shouldBeVisible(this.inventoryDetailNameSelector);
         this.actions.shouldBeVisible(this.inventoryDetailDescriptionSelector);
         this.actions.shouldBeVisible(this.productCardPrice);
+        this.actions.getTextFromElement(this.productCardPrice).then((priceText) => {
+            expect(priceText.trim()).to.match(/^\$\d+\.\d{2}$/);
+        });
         this.actions.getTextFromElement(this.inventoryDetailActionButton).then((buttonText) => {
             expect(buttonText.trim()).to.equal(addToCartText);
         });

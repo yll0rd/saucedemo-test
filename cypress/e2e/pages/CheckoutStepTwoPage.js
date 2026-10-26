@@ -60,19 +60,19 @@ export class CheckoutStepTwoPage {
     }
 
     getItemSubtotal() {
-        return cy.get(this.subtotalLabel).invoke('text').then((text) => (
+        return this.actions.getTextFromElement(this.subtotalLabel).then((text) => (
             parseFloat(text.replace('Item total:', '').replace('$', '').trim())
         ));
     }
 
     getTax() {
-        return cy.get(this.taxLabel).invoke('text').then((text) => (
+        return this.actions.getTextFromElement(this.taxLabel).then((text) => (
             parseFloat(text.replace('Tax:', '').replace('$', '').trim())
         ));
     }
 
     getTotal() {
-        return cy.get(this.totalLabel).invoke('text').then((text) => (
+        return this.actions.getTextFromElement(this.totalLabel).then((text) => (
             parseFloat(text.replace('Total:', '').replace('$', '').trim())
         ));
     }

@@ -25,9 +25,9 @@ describe('SauceDemo checkout step two', () => {
         ca.clickOnWebElement(inventoryPage.shoppingCartLinkIcon);
         cartPage.assertOnPage();
         cy.get(cartPage.cartItem).first().within(() => {
-            cy.get(cartPage.cartItemTitle).invoke('text').as('selectedProductTitle');
-            cy.get(cartPage.cartItemDescription).invoke('text').as('selectedProductDescription');
-            cy.get(cartPage.cartItemPrice).invoke('text').as('selectedProductPrice');
+            ca.getTextFromElement(cartPage.cartItemTitle, 'selectedProductTitle');
+            ca.getTextFromElement(cartPage.cartItemDescription, 'selectedProductDescription');
+            ca.getTextFromElement(cartPage.cartItemPrice, 'selectedProductPrice');
         });
         ca.clickOnWebElement(cartPage.checkoutButton);
         checkoutStepOnePage.fillForm(

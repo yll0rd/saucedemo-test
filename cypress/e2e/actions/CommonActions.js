@@ -44,8 +44,9 @@ export class CommonActions {
     return cy.get(selector).children().should('have.length.greaterThan', 0);
   }
 
-  getTextFromElement(selector) {
-    return cy.get(selector).invoke('text').as('elementText');
+  getTextFromElement(selector, alias) {
+    const text = cy.get(selector).invoke('text');
+    return typeof alias === 'string' ? text.as(alias) : text;
   }
 
   openSideBarMenu() {
